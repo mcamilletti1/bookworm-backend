@@ -1,4 +1,3 @@
-import random
 from tqdm import tqdm
 
 from django.core.management.base import BaseCommand
@@ -6,6 +5,7 @@ from django.contrib.auth import get_user_model
 from django.db import IntegrityError
 
 from faker import Faker
+import secrets
 
 User = get_user_model()
 
@@ -20,7 +20,7 @@ class Command(BaseCommand):
         fake = Faker()
         count = options["count"]
         for _ in tqdm(range(count)):
-            phone = "+8801"+ str(random.randint(111111111, 999999999))
+            phone = "+8801"+ str(secrets.SystemRandom().randint(111111111, 999999999))
             username = fake.user_name()
             email = fake.email()
             first_name = fake.first_name()
